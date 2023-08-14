@@ -1,1 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
+html {
+  min-height: 100%;
+  position: relative;
+}
+
+body {
+  margin: 0;
+  margin-bottom: 40px;
+}
+
+header{
+  width: 100%;
+  min-height: 15vh;
+  background-image: url(assets/img/HOMESHOP.png);
+  background-repeat: no-repeat;
+  background-size: 100;
+  background-position: center;
+  background-color: black;
+}
+
+nav{
+  width: auto;
+  min-height: 6vh;
+}
+
+section{
+  width: auto;
+  min-height: 70vh;
+}
+footer{
+  min-height: 8vh;
+  width: auto;
+  height: auto;
+}
