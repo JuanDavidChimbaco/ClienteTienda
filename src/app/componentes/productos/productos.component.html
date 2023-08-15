@@ -1,0 +1,68 @@
+<div class="row d-flex justify-content-center">
+  <div class="spinner-border text-primary" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="mb-4">
+    <h1 class="text-center">Gestion Productos</h1>
+  </div>
+  <div class="col-md-12 text-center">
+    <a class="btn btn-info text-black" href="/producto"><i class="fa-solid fa-plus fa-beat"></i> Agregar Producto</a>
+  </div>
+  <div class="col">
+    <table class="table table-dark mt-4">
+      <thead>
+        <tr>
+          <th scope="col">Código</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Precio</th>
+          <th scope="col">Categoría</th>
+          <th scope="col">Imagen</th>
+          <th scope="col">Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr id="fila" *ngFor="let producto of listaProductos">
+          <td>{{ producto.proCodigo }}</td>
+          <td>{{ producto.proNombre }}</td>
+          <td>{{ producto.proPrecio | currency : "COP " }}</td>
+          <ng-container *ngFor="let categoria of listaCategorias">
+            <td *ngIf="producto.proCategoria == categoria.id">
+              {{ categoria.catNombre }}
+            </td>
+          </ng-container>
+          <td class="text-center">
+            <img src="{{ producto.proFoto }}" alt="{{ producto.proNombre }}" width="50" />
+          </td>
+          <td class="text-center">
+            <a href="/editarProducto/{{ producto.id }}"><i
+                class="fa-solid fa-pen-to-square fa-beat-fade text-success"></i></a>
+            &nbsp;&nbsp;
+            <i (click)="abrirModalEliminar(producto.id)" class="fa-solid fa-trash fa-beat-fade text-danger"></i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Modal -->
+    <div class="modal" tabindex="-1" id="modalEliminar" [ngStyle]="{'display':display}">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Eliminar Producto</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="cerrarModal()">&times;</button>
+          </div>
+          <div class="modal-body">
+            <p>¿Esta seguro de Eliminar este Producto?</p>
+          </div>
+          <div class="modal-footer">
+            <!-- <a href="/productos" id="rutaEliminar"> -->
+              <button type="button" class="btn btn-success" id="btnEliminar" (click)="eliminarProducto()" > SI </button>
+            <!-- </a> -->
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="btnCancelarModal" (click)="cerrarModal()">NO</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

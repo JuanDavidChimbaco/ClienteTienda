@@ -32,13 +32,6 @@ constructor(private location: Location,private _productoService: ProductoService
       this.mensaje = "Error en el formulario";
       return;
     }
-      // var codigo = frmProductoValue.txtCodigo;
-      // var nombre = frmProductoValue.txtNombre;
-      // var precio = frmProductoValue.txtPrecio;
-      // var categoria = frmProductoValue.cbCategoria;
-      // var foto = frmProductoValue.fileFoto;
-      // this.producto = new Producto(codigo,nombre,precio,categoria,foto);
-
       const formData = new FormData();
       formData.append('proCodigo', this.frmProducto.value.txtCodigo);
       formData.append('proNombre', this.frmProducto.value.txtNombre);
@@ -55,7 +48,7 @@ constructor(private location: Location,private _productoService: ProductoService
     this._productoService.agregarProducto(formData).subscribe(respuesta=>{
       console.log(respuesta);
       this.mensaje = "Producto agregado correctamente";
-      // this.location.back();
+      this.location.back();
     },error=>{
       console.log(error);
       this.mensaje = "Error al agregar el producto";

@@ -13,6 +13,8 @@ import { PiePaginaComponent } from './componentes/pie-pagina/pie-pagina.componen
 import { CategoriaComponent } from './componentes/categoria/categoria.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ProductoComponent } from './componentes/producto/producto.component';
+import { ProductosComponent } from './componentes/productos/productos.component';
+import { EditarProductoComponent } from './componentes/editar-producto/editar-producto.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { ProductoComponent } from './componentes/producto/producto.component';
     InicioComponent,
     PiePaginaComponent,
     CategoriaComponent,
-    ProductoComponent
+    ProductoComponent,
+    ProductosComponent,
+    EditarProductoComponent
   ],
   imports: [
     BrowserModule,
