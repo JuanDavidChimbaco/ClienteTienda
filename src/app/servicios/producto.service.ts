@@ -12,23 +12,27 @@ export class ProductoService {
 
   constructor(private http: HttpClient) {}
 
-  getproductos():Observable<any> {
+  getProductos():Observable<any> {
     return this.http.get(this.url2);
   }
 
-  getproducto(id: number):Observable<any> {
+  getProducto(id: number):Observable<any> {
     return this.http.get(this.url2 +"/"+ id);
   }
 
-  eliminarproducto(id: number):Observable<any> {
+  eliminarProducto(id: number):Observable<any> {
     return this.http.delete(this.url2 +"/"+ id);
   }
 
-  agregarproducto(producto: Producto):Observable<any> {
-    return this.http.post(this.url2, producto);
+  // agregarProducto(producto: Producto):Observable<any> {
+  //   return this.http.post(this.url2, producto);
+  // }
+
+  agregarProducto(formData: FormData){
+    return this.http.post(this.url2, formData);
   }
 
-  editarproducto(id:number, producto: Producto):Observable<any> {
+  editarProducto(id:number, producto: Producto):Observable<any> {
     return this.http.put(this.url2 +"/"+ id, producto);
   }
 

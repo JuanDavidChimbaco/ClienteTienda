@@ -1,4 +1,15 @@
 <div class="">
   <br>
   <h3 class="text-center">Bienvenidos a la tienda ADSO 24491133</h3>
+  <br>
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-4 mb-3" *ngFor="let categoria of categorias">
+      <div class="card text-center pt-5 ">
+        <div class="card-body shadow">
+          <i [ngClass]="iconos[categoria.catNombre]"></i>
+          <h5 class="card-title">{{ categoria.catNombre }}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

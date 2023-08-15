@@ -1,49 +1,60 @@
 <div class="d-flex justify-content-center">
   <div class="w-50 col-md-12" id="Agregar">
     <br />
-    <form>
-      <div>
-        <h1 class="text-center text-bg-danger">Registrar Producto</h1>
-      </div>
-      <div class="form-floating mb-3">
-        <input type="text" name="txtCodigo" id="txtCodigo" class="form-control" value="" placeholder="codigo"
-        required />
+    <div>
+      <h1 class="text-center text-bg-danger rounded">Registrar Producto</h1>
+    </div>
+    <form [formGroup]="frmProducto" (ngSubmit)="agregarProducto()"
+    enctype="multipart/form-data" class="w-50" style="margin: auto;" class="was-validated" >
+
+      <div class="form-floating mb-3 mt-3">
+        <input type="text" name="txtCodigo" id="txtCodigo" formControlName="txtCodigo"
+        class="form-control" value="" placeholder="codigo" required />
         <label for="txtCodigo" class="text-secondary"><small>Codigo:</small></label>
       </div>
 
       <div class="form-floating mb-3">
-        <input type="text" name="txtNombre" id="txtNombre" class="form-control" value=""placeholder="nombre"
-        required />
+        <input type="text" name="txtNombre" id="txtNombre" formControlName="txtNombre"
+        class="form-control" value=""placeholder="nombre" required />
         <label for="txtNombre" class="text-secondary"><small>Nombre:</small></label>
       </div>
 
       <div class="form-floating mb-3">
-        <input type="number" name="txtPrecio" id="txtPrecio" class="form-control" value="" placeholder="precio"
-        required />
+        <input type="number" name="txtPrecio" id="txtPrecio" formControlName="txtPrecio"
+        class="form-control" value="" placeholder="precio" required />
         <label for="txtPrecio" class="text-secondary"><small>Precio:</small></label>
       </div>
 
       <div class="form-floating mb-3">
-        <input type="file" name="fileFoto" id="fileFoto" class="form-control" accept=".jpg" required />
-        <label for="fileFoto" class="text-secondary">Foto (jpg):</label>
-      </div>
-
-      <div class="form-floating mb-3">
-        <select name="cbCategoria" id="cbCategoria" class="form-select" required>
+        <select name="cbCategoria" id="cbCategoria" class="form-select" formControlName="cbCategoria" required>
           <option value=""><small>Seleccione</small></option>
-
-          <option value="" class="fw-bold">
-
+          <option [value]="categoria.id" *ngFor="let categoria of listaCategorias">
+            {{categoria.catNombre}}
           </option>
-
         </select>
         <label for="cbCategoria" class=""><small>Categoría:</small></label>
       </div>
 
+      <div class="form-floating mb-3">
+        <input type="file" name="fileFoto" id="fileFoto" formControlName="fileFoto"
+        class="form-control" accept=".jpg" (change)="onFileSelect($event)"/>
+        <label for="fileFoto" class="text-secondary">Foto (jpg):</label>
+      </div>
+
+      <div class="text-center" *ngIf="rutaImagen">
+        <img [src]="rutaImagen" alt="" id="imagenProducto" width="100" height="100">
+      </div>
+
       <div class="d-flex justify-content-center pb-4">
-        <button class="btn btn-success fw-bold text-white"><i class="fa-regular fa-floppy-disk fa-bounce"></i> Agregar</button>
+        <button class="btn btn-success fw-bold text-white"><i class="fa-regular fa-floppy-disk fa-bounce"></i>Agregar</button>
+        <a href="/prodcutos">
+          <button type="button" class="btn btn-warning mx-2 fw-bold"><i class="fa-solid fa-ban fa-beat"></i>Cancelar</button>
+        </a>
       </div>
     </form>
+
+    <div class="text-center">{{mensaje}}</div>
+
   </div>
 </div>
 
