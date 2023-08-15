@@ -33,8 +33,8 @@ export class ProductoService {
     return this.http.put(this.url2+ id + '/', formData);
   }
 
-  getProductoByCodigo(codigo: number):Observable<any> {
-    return this.http.get(this.url3 + "/"+ codigo+'/');
+  getProductoByCodigo(codigo: string):Observable<any> {
+    return this.http.get(this.url3 +codigo+'/');
   }
 
 }

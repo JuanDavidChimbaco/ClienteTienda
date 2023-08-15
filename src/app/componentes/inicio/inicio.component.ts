@@ -25,6 +25,7 @@ export class InicioComponent {
       'Ropa': 'fa-solid fa-shirt fa-bounce fa-5x',
       'Zapatos': 'fa-solid fa-shoe-prints fa-bounce fa-5x',
       'Herramientas': 'fa-solid fa-screwdriver-wrench fa-bounce fa-5x',
+      'Accesorios': 'fa-solid fa-spinner fa-bounce fa-5x'
     };
 
 

@@ -4,6 +4,10 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { CategoriaService } from 'src/app/servicios/categoria.service';
 import { ProductoService } from 'src/app/servicios/producto.service';
 import { Location } from '@angular/common';
+import { Observable } from 'rxjs/internal/Observable';
+import { catchError } from 'rxjs/internal/operators/catchError';
+import { of } from 'rxjs/internal/observable/of';
+import { map } from 'rxjs/internal/operators/map';
 
 @Component({
   selector: 'app-editar-producto',
@@ -18,6 +22,7 @@ export class EditarProductoComponent implements OnInit {
   public mensaje: string = '';
   public selectedFoto: File | undefined;
   public rutaImagen: string = ''; // Ruta de la imagen seleccionada
+  public existe:boolean = false;
 
   constructor(private route: ActivatedRoute, private _categoriaService: CategoriaService,
     private productoService: ProductoService, private location: Location) { }
@@ -49,13 +54,11 @@ export class EditarProductoComponent implements OnInit {
     }
     // Validación de código repetido
     const codigo = this.frmProducto.value.txtCodigo;
-    console.log("este es el codigo: "+ codigo);
-
-    if (this.existeCodigoRepetido(codigo)) {
-      this.frmProducto.controls['txtCodigo'].setValue('');
-      this.mensaje = "El código ya está en uso. Por favor, ingrese uno nuevo.";
-      return;
-    }
+    this.existeCodigoRepetido(codigo).subscribe(existe => {
+      if (existe) {
+        this.frmProducto.controls['txtCodigo'].setValue('');
+        this.mensaje = "El código ya está en uso. Por favor, ingrese uno nuevo.";
+      } else {
       const formData = new FormData();
       formData.append('proCodigo', this.frmProducto.value.txtCodigo);
       formData.append('proNombre', this.frmProducto.value.txtNombre);
@@ -74,8 +77,10 @@ export class EditarProductoComponent implements OnInit {
       }, error => {
         console.log(error);
         this.mensaje = error.error.proCodigo[0];
+        this.frmProducto.controls['txtCodigo'].setValue('');
       });
-
+    }
+  });
   }
 
   public onFileSelect(event: any) {
@@ -86,21 +91,25 @@ export class EditarProductoComponent implements OnInit {
     }
   }
 
-  existeCodigoRepetido(codigo: string): boolean {
-    this.productoService.getProductoByCodigo(Number(codigo)).subscribe(result => {
-      console.log(result);
-      if (result.proCodigo === codigo) {
-        let existe = true;
-      }
-    });
-    console.log(existe);
-    return existe;
+  existeCodigoRepetido(codigo: string): Observable<boolean> {
+    return this.productoService.getProductoByCodigo(codigo).pipe(
+      map(result => {
+        if(result.proCodigo == codigo){
+          return false
+        }else{
+          return true; // Retorna true si el código existe
+        }
+      }),
+      catchError(error => {
+        console.error(error);
+        return of(false); // Retorna false si ocurre un error o el código no existe
+      })
+    );
   }
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.productId = +params['id'];
-      console.log(this.productId);
     });
     this.listarCategorias();
     this.obtenerProductos();
