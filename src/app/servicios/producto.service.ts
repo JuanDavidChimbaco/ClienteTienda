@@ -8,7 +8,7 @@ import { Producto } from 'src/app/modelos/producto.model';
 })
 export class ProductoService {
   url = 'http://localhost:8000/producto';
-  url2 = 'http://dajun318.pythonanywhere.com/api/producto/';
+  url2 = 'https://dajun318.pythonanywhere.com/api/producto/';
   url3 = 'https://dajun318.pythonanywhere.com/api/productoCodigo/'
 
   constructor(private http: HttpClient) {}

@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "angularproject-ce56a": {
+      "hosting": {
+        "ClienteTienda": [
+          "angularproject-ce56a"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "angularproject-ce56a"
+  }
+}

@@ -73,6 +73,8 @@ export class EditarProductoComponent implements OnInit {
       this.productoService.editarProducto(this.productId, formData).subscribe(respuesta => {
         console.log(respuesta);
         this.mensaje = "Producto editado correctamente";
+        console.log(this.mensaje);
+
         this.location.back();
       }, error => {
         console.log(error);

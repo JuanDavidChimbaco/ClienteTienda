@@ -19,7 +19,7 @@ export class ProductosComponent implements OnInit{
 
   constructor(private productoService: ProductoService, private categoriaService: CategoriaService, private router: Router) {
     this.url2 = 'https://dajun318.pythonanywhere.com/media/fotos';
-    this.url = 'http://localhost:8000/fotos/';
+    this.url = 'https://localhost:8000/fotos/';
   }
 
   obtenerProductos(){
